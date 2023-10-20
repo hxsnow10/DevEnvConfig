@@ -8,6 +8,22 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+" 自动补齐
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_autoclose_preview_window_after_completion=1
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+" 展示文件目录
+Plugin 'scrooloose/nerdtree'
+"nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-m> :NERDTreeToggle<CR>
+"nnoremap <C-f> :NERDTreeFind<CR>
+
+" 在最底下增加一行信息，显示文件名等信息
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" vim模板
 Plugin 'tibabit/vim-templates'
 let g:tmpl_search_paths = ['~/.vim/templates']
 let g:tmpl_author = 'xiahong'
@@ -22,6 +38,19 @@ set nofoldenable " disable fold
 " python语言检查与高亮加强
 Plugin 'scrooloose/syntastic'
 Plugin 'nvie/vim-flake8'
+let g:syntastic_python_checkers = ['flake8', 'pylint']
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_pylint_args = "
+    \--variable-rgx=\"^[a-z][a-z0-9]*((_[a-z0-9]+)*)?$\"
+    \ --argument-rgx=\"^[a-z][a-z0-9]*((_[a-z0-9]+)*)?$\"
+    \ --const-rgx=\"[a-zA-Z_][a-zA-Z0-9_]{2,30}$\""
+" let g:syntastic_python_flake8_args = "--ignore=F841"
 let python_highlight_all=1
 syntax on
 
@@ -32,21 +61,6 @@ call vundle#end()            " required
 filetype plugin indent on    " required
 
 execute pathogen#infect()
-let g:syntastic_python_checkers = ['flake8', 'pylint']
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_pylint_args = "
-    \--variable-rgx=\"^[a-z][a-z0-9]*((_[a-z0-9]+)*)?$\"
-    \ --argument-rgx=\"^[a-z][a-z0-9]*((_[a-z0-9]+)*)?$\"
-    \ --const-rgx=\"[a-zA-Z_][a-zA-Z0-9_]{2,30}$\""
-" let g:syntastic_python_flake8_args = "--ignore=F841"
-
 
 filetype on                   " try to detect filetypes
 filetype plugin indent on     " enable loading indent file for filetype
@@ -67,6 +81,8 @@ set ruler                   " 打开状态栏标尺
 set ts=4                    " 设定 tab 长度为 4
 
 "set tabstop=1               " 设定 tab 长度为 4
+
+set clipboard=unnamed
 
 set expandtab               " use space instead of tab
 
@@ -126,3 +142,5 @@ augroup HiglightTODO
 augroup END
 
 set ts=4 sw=4
+" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+
