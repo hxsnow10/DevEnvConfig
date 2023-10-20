@@ -9,6 +9,7 @@ sshkey-gen
 eval `ssh-agent`
 ssh-add path_of_private_key
 # add publickey to github
+# add eval and ssh-add to bashrc
 `
 
 # vim配置
