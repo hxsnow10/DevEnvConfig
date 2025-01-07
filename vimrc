@@ -23,6 +23,17 @@ nnoremap <C-m> :NERDTreeToggle<CR>
 " 在最底下增加一行信息，显示文件名等信息
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
+" codeium
+Plugin 'Exafunction/codeium.vim'
+let g:codeium_enabled = v:true
+let g:codeium_filetypes_disabled_by_default = v:true
+let g:codeium_filetypes = {
+    \ "rust": v:true,
+    \ "typescript": v:true,
+    \ "py": v:true,
+    \ }
+" 有问题跑不起来
+
 " vim模板
 Plugin 'tibabit/vim-templates'
 let g:tmpl_search_paths = ['~/.vim/templates']
