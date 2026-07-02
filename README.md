@@ -35,7 +35,21 @@ git config --global user.name "xiahong"
 ```
 
 # vim配置
-有点麻烦
+由于服务器连接github-copilot有问题...，暂且用vs code试试。
+
+编译安装最新vim
+```
+git clone https://github.com/vim/vim.git
+cd vim
+sudo apt install -y python3-dev
+# make distclean
+# compile vim with python support
+./configure --with-features=huge --enable-python3interp --enable-fail-if-missing --with-python3-command=/usr/bin/python3 --with-python3-config-dir=/usr/lib/python3.10/config-3.10-x86_64-linux-gnu
+# ./configure --with-features=huge --enable-python3interp --enable-fail-if-missing
+make -j8
+make install
+```
+
 ```
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
@@ -44,14 +58,10 @@ vim ~/.vimrc
 :source %
 :PluginInstall
 cp vim-templates/* to ~/.vim/bundle/vim-templates/templates
-# YouComplteteMe requires Vim 9.1.0016+.如果需要就要升级；codeium依赖9.0.0185+
-```
 
-vim 升级,可以升级到库里提前编译好的版本9.0，没找到9.1的
-```
-add-apt-repository -r ppa:jonathonf/vim
-apt update
-apt install vim
+cd ~/.vim/bundle/YouCompleteMe/
+python3 install.py
+# python3 install.py --force-sudo
 ```
 
 copilot, 可用
@@ -69,26 +79,12 @@ nvm current # Should print "v23.6.0".
 # Verify npm version:
 npm -v # Should print "10.9.2".
 
+git clone --depth=1 https://github.com/github/copilot.vim.git \
+  ~/.vim/pack/github/start/copilot.vim
 # vim and :Copilot setup
 ```
 
-编译安装最新vim
-```
-git clone https://github.com/vim/vim.git
-cd vim
-# make distclean
-# compile vim with python support
-./configure --with-features=huge --enable-python3interp --enable-fail-if-missing --with-python3-command=/usr/bin/python3 --with-python3-config-dir=/usr/lib/python3.10/config-3.10-x86_64-linux-gnu
-make -j8
-make install
-```
 
-启动ycm
-```
-cd ~/.vim/bundle/YouCompleteMe/
-python3 install.py
-# python3 install.py --force-sudo
-```
 
 # C++开发环境
 
