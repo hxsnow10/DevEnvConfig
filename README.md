@@ -5,19 +5,37 @@ DevEnvConfig
 # 镜像
 以下所有配置都可以存储在镜像里。镜像的管理跟平台有关。
 
-# github配置
-管理ssh私钥
+# 服务器公钥配置
+方便你从本地登录服务器；
+当然你可能在云服务器平台可以统一配公钥就省略了
 ```
-ssh-keygen
+ssh-copy-id -i ~/.ssh/id_rsa.pub 用户名@IP
+ssh -v 用户名@IP  # 验证
+```
+
+# github配置
+方便你从服务器交互github。这里有2种方式，
+1）把你本地的github私钥上传到服务器，公钥已经在github上了  
+2）在服务器上重新生成份私钥、公钥
+1更方便，但存在安全隐患，2稍麻烦。
+
+```
+ssh-copy-id -i ~/.ssh/id_rsa 用户名@IP
+# login 
 eval `ssh-agent`
 ssh-add path_of_private_key
-# add publickey to github
 # add eval and ssh-add to bashrc
+```
+
+方法2: `bash setup_github.sh`
+
+```
 git config --global user.email "xiahahaha01@gmail.com"
 git config --global user.name "xiahong"
 ```
 
 # vim配置
+有点麻烦
 ```
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
