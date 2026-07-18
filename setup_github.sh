@@ -70,6 +70,7 @@ fi
 echo "🔧 配置 SSH config 文件..."
 mkdir -p ~/.ssh
 
+touch ~/.ssh/config
 sed -i '/^Host github.com$/,/^$/d' ~/.ssh/config
 cat >> ~/.ssh/config << EOF
 
